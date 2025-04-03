@@ -28,9 +28,10 @@ export const getCurrentDateInTimezone = (timezone: Timezone): string => {
  */
 export const getDayOfWeekInTimezone = (timezone: Timezone): string => {
   const now = new Date();
-  const dayNum = parseInt(formatInTimeZone(now, timezone, 'e'));
+  // 'i'を使用して1-7の数値を取得（1が月曜、7が日曜）
+  const dayNum = parseInt(formatInTimeZone(now, timezone, 'i'));
   
-  // 曜日の名称（日本語）
-  const days = ['日', '月', '火', '水', '木', '金', '土'];
-  return days[dayNum % 7];
+  // 曜日の配列を月曜始まりに調整
+  const days = ['月', '火', '水', '木', '金', '土', '日'];
+  return days[(dayNum - 1) % 7];
 }; 
